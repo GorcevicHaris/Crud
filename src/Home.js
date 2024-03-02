@@ -5,12 +5,10 @@ function Home() {
   useEffect(() => {
     axios
       .get("http://localhost:8081/")
-      .then((res) => {
-        setData(res.data);
-        console.log(res.data, "data");
-      })
-      .catch((err) => console.log(err));
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err, "error"));
   }, []);
+  console.log(data);
   return (
     <div>
       <div>
