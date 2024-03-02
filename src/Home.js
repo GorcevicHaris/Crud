@@ -4,11 +4,14 @@ function Home() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8081/")
+      .get("http://localhost:8081")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err, "error"));
   }, []);
-  console.log(data);
+
+  function handleDeleteI(students) {
+    setData(data.filter((el) => el.id !== students));
+  }
   return (
     <div>
       <div>
@@ -30,7 +33,13 @@ function Home() {
                   <td>{student.email}</td>
                   <td>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button
+                      onClick={() =>
+                        setData(data.filter((el) => el.id !== student.id))
+                      }
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
