@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 function Home() {
+  const navigate = useNavigate()
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -40,9 +41,9 @@ function Home() {
                   <td>{student.email}</td>
                   <td>
                     <Link to={`/read/${student.id}`} className="btn btn-sm btn-info">Read</Link>
-                    <button className="btn btn-sm btn-primary mx-2">
+                    <Link to={`/edit/${student.id}`}  className="btn btn-sm btn-primary mx-2">
                       Edit
-                    </button>
+                    </Link>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => handleDeleteI(student.id)}

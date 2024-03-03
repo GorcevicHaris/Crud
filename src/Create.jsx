@@ -22,7 +22,7 @@ function Create() {
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2>Add Student</h2>
           <div className='mb-2'>
             <label>Name</label>
@@ -33,7 +33,7 @@ function Create() {
             <label>Email</label>
             <input onChange={(e)=> setValues({...values,email:e.target.value})} placeholder='Enter Email' className='form-control'></input>
           </div>
-          <button onClick={handleSubmit} className='btn btn-success'>Submit</button>
+          <button className='btn btn-success'>Submit</button>
         </form>
       
       </div>
