@@ -13,7 +13,7 @@ function Home() {
   }, []);
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:8081/delete/`+id)
+    axios.delete(`http://localhost:8081/delete/${id}`)
     .then(res => {
       window.location.reload()
     })
