@@ -13,11 +13,10 @@ function Create() {
     e.preventDefault()
     axios.post(`http://localhost:8081/student`,values)
     .then(res => {
-      console.log(res)
       navigate('/')
-    })
-    .catch(err =>console.log(err))
+    }).catch(err => console.log(err))
   }
+
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">

@@ -10,7 +10,7 @@ import { Link, useParams } from 'react-router-dom'
 function Read() {
     const {id} = useParams()
     const [student,setStudent] = useState([])
-console.log(id,'readid')
+    console.log(id,'readid')
     useEffect(()=>{
         axios.get(`http://localhost:8081/read/`+id)
         .then(res => {
@@ -28,7 +28,7 @@ console.log(id,'readid')
         <h2>{student.email}</h2>
         <Link to={'/'} className='btn btn-primary me-2'>Back</Link>
         <Link to={`/edit/${student.id}`} className='btn btn-primary'>Edit</Link>
-        <button className='btn btn-sm btn-danger'>Delete</button>
+        <button className='btn btn-sm btn-danger me-2'>Delete</button>
         </div>
         </div>
 

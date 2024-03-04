@@ -4,15 +4,20 @@ import { Link,useNavigate  } from "react-router-dom";
 function Home() {
   const navigate = useNavigate()
   const [data, setData] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:8081/")
+      .get("http://localhost:8081")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err, "error"));
   }, []);
 
-  function handleDeleteI(id) {
-    setData(data.filter((el) => el.id !== id));
+  function handleDelete(id) {
+    axios.delete(`http://localhost:8081/delete/`+id)
+    .then(res => {
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
   }
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
@@ -46,7 +51,7 @@ function Home() {
                     </Link>
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleDeleteI(student.id)}
+                      onClick={() => handleDelete(student.id)}
                     >
                       Delete
                     </button>
