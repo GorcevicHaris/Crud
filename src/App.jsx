@@ -5,8 +5,8 @@ import Create from "./Create"
 import { useState } from "react";
 import Read from "./Read";
 import Update from "./Update";
+
 function App() {
-  
   return (
     <BrowserRouter>
     <Routes>
@@ -14,8 +14,6 @@ function App() {
       <Route path="/create" element={<Create/>}/>
       <Route path="/read/:id" element={<Read/> }/>
       <Route path="/edit/:id" element={<Update/> }/>
-
-
     </Routes>
     </BrowserRouter>
   );

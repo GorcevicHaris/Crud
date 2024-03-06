@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 // // Na primer, ako je vrednost id koja se dobije iz URL-a 5,
 //  URL zahteva će biti http://localhost:8081/read/5. Ovo znači
 //   da će zahtev biti usmeren na putanju /read/5 na serverskoj 
@@ -10,7 +10,7 @@ import { Link, useParams } from 'react-router-dom'
 function Read() {
     const {id} = useParams()
     const [student,setStudent] = useState([])
-    
+    const navigate = useNavigate()
     useEffect(()=>{
         axios.get(`http://localhost:8081/read/`+id)
         .then(res => {
@@ -19,6 +19,12 @@ function Read() {
         .catch(err => console.log(err))
     },[])
 
+    function handleDelete(){
+        axios.delete(`http://localhost:8081/delete/`+id)
+        .then(res =>{
+            navigate('/')
+        }).catch(err => console.log(err))
+    }
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
     <div className="w-50 bg-white rounded p-3">
@@ -28,11 +34,12 @@ function Read() {
             <h2>{el.id}</h2>
             <h2>{el.name}</h2>
             <h2>{el.email}</h2>
+            <Link to={'/'} className='btn btn-primary me-2'>Back</Link>
+            <Link to={`/edit/${el.id}`} className='btn btn-primary'>Edit</Link>
+            <button onClick={handleDelete} className='btn btn-sm btn-danger me-2'>Delete</button>
             </>
         })}
-        <Link to={'/'} className='btn btn-primary me-2'>Back</Link>
-        <Link to={`/edit/${student.id}`} className='btn btn-primary'>Edit</Link>
-        <button className='btn btn-sm btn-danger me-2'>Delete</button>
+        
         </div>
         </div>
 
