@@ -44,6 +44,7 @@ function Update() {
             <input value={values.email} onChange={(e)=> setValues({...values,email:e.target.value})} placeholder='Enter Email' className='form-control'></input>
           </div>
           <button className='btn btn-success'>Submit</button>
+          <Link to={'/'} className='btn btn-success'>Back</Link>
         </form>
       </div>
     </div>
