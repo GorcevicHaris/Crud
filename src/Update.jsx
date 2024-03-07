@@ -1,38 +1,35 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState,} from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 function Update() {
   const {id} = useParams()
   const navigate = useNavigate()
+  const [values,setValues] = useState({
+    name:'',
+    email:''
+  })
+
   useEffect(()=>{
-    axios.get(`http://localhost:8081/read/`+id)
-    .then(res =>{
-       console.log(res)
-       setValues({...values,name:res.data[0].name,email:res.data[0].email})
-       console.log(values)
-      })
+    axios.get(`http://localhost:8081/read/${id}`)
+    .then(res => {
+      setValues({...values,name:res.data[0].name,email:res.data[0].email})
+    })
     .catch(err => console.log(err))
   },[])
-    const [values,setValues] = useState({
-      name:'',
-      email:'',
-    })
-  console.log(values)
 
-  function handleSubmit(event){
-    event.preventDefault()
-    axios.put(`http://localhost:8081/update/`+id,values)
+  function handleSubmit(e){
+    e.preventDefault()
+    axios.put(`http://localhost:8081/update/${id}`,values)
     .then(res => {
-      console.log(res)
       navigate('/')
-    }).catch(err => console.log(err,'error'))
+    }).catch(err => console.log(err))
   }
-
+  console.log(values)
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <h2>Update Student</h2>
           <div className='mb-2'>
             <label>Name</label>
@@ -44,7 +41,7 @@ function Update() {
             <input value={values.email} onChange={(e)=> setValues({...values,email:e.target.value})} placeholder='Enter Email' className='form-control'></input>
           </div>
           <button className='btn btn-success'>Submit</button>
-          <Link to={'/'} className='btn btn-success'>Back</Link>
+          <Link to={'/'} className='btn btn-success mx-2'>Back</Link>
         </form>
       </div>
     </div>

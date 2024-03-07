@@ -8,7 +8,22 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 //    podataka o studentu sa ID-jem 5 iz baze podataka.
 
 function Read() {
-atch(err => console.log(err))
+    const {id} = useParams()
+    const [student,setStudent] = useState([])
+    const navigate = useNavigate()
+    useEffect(()=>{
+        axios.get(`http://localhost:8081/read/`+id)
+        .then(res => {
+            setStudent(res.data)
+        })
+        .catch(err => console.log(err))
+    },[])
+
+    function handleDelete(){
+        axios.delete(`http://localhost:8081/delete/`+id)
+        .then(res =>{
+            navigate('/')
+        }).catch(err => console.log(err))
     }
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
