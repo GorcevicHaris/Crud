@@ -12,19 +12,19 @@ function Update() {
 
   useEffect(()=>{
     axios.get(`http://localhost:8081/read/${id}`)
-    .then(res => {
-      setValues({...values,name:res.data[0].name,email:res.data[0].email})
-    })
+    .then(res => setValues({name:res.data[0].name,email:res.data[0].email}))
     .catch(err => console.log(err))
   },[])
-
+  
   function handleSubmit(e){
     e.preventDefault()
     axios.put(`http://localhost:8081/update/${id}`,values)
-    .then(res => {
+    .then(res =>{
       navigate('/')
-    }).catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
   }
+  
   console.log(values)
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">

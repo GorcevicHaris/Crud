@@ -38,7 +38,7 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {data.map((student, index) => {
+            {data && data.map((student, index) => {
               return (
                 <tr key={index}>
                   <td>{student.id}</td>
